@@ -2,6 +2,19 @@
 This is a modified version of nfdump utilities to support the Sagan 
 log analysis engine (https://github.com/beave/sagan). 
 
+When compiling, build with the "--enable-sagan" flag.  This adds a
+new command line option for nfcapd (-F).  For example:
+
+nfcapd -l /var/log/netflow-archive -p 2056 -F /var/run/sagan-netflow.fifo
+
+This tells nfcapd to record data,  as normal,  to the /var/log/netflow-archive
+directory.  nfcapd should listen on port 2056 for netflow data. 
+That data should be written the /var/run/saggan-netflow.fifo.  The FIFO
+written to in the Sagan format.  That is,  no additional formating is
+necessary.
+
+A Sagan + Netflow HOWTO will be released soon.
+
 
 Original README continues below
 -------------------------------

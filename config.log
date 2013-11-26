@@ -27,8 +27,11 @@ uname -v = #1 SMP Tue Jul 9 14:52:00 UTC 2013
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
+PATH: /usr/local/sbin
 PATH: /usr/local/bin
+PATH: /usr/sbin
 PATH: /usr/bin
+PATH: /sbin
 PATH: /bin
 PATH: /opt/bin
 PATH: /usr/x86_64-pc-linux-gnu/gcc-bin/4.6.3
@@ -167,11 +170,11 @@ configure:4355: checking lex output file root
 configure:4369: result: lex.yy
 configure:4374: checking lex library
 configure:4388: gcc -o conftest -g -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn -fno-strict-aliasing -DSAGAN   conftest.c   >&5
-/tmp/ccpeQz4d.o: In function `input':
+/tmp/ccsIUnzO.o: In function `input':
 /home/champ/code/nfdump-1.6.10p1-sagan/lex.yy.c:1170: undefined reference to `yywrap'
-/tmp/ccpeQz4d.o: In function `yylex':
+/tmp/ccsIUnzO.o: In function `yylex':
 /home/champ/code/nfdump-1.6.10p1-sagan/lex.yy.c:869: undefined reference to `yywrap'
-/tmp/ccpeQz4d.o: In function `main':
+/tmp/ccsIUnzO.o: In function `main':
 /home/champ/code/nfdump-1.6.10p1-sagan/conftest.l:18: undefined reference to `yywrap'
 collect2: ld returned 1 exit status
 configure:4388: $? = 1
@@ -2423,7 +2426,7 @@ configure:5503: checking for fpurge
 configure:5503: gcc -o conftest -g -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn -fno-strict-aliasing -DSAGAN   conftest.c  >&5
 conftest.c:48:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
 conftest.c:57:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
-/tmp/ccxPzvM9.o: In function `main':
+/tmp/ccRwY1MT.o: In function `main':
 /home/champ/code/nfdump-1.6.10p1-sagan/conftest.c:59: undefined reference to `fpurge'
 collect2: ld returned 1 exit status
 configure:5503: $? = 1
@@ -3859,7 +3862,7 @@ configure:7388: checking for res_search in -lresolv
 configure:7413: gcc -o conftest -g -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn -fno-strict-aliasing -DSAGAN   conftest.c -lresolv   >&5
 conftest.c:79:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
 conftest.c:81:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
-/tmp/ccKZGbRk.o: In function `main':
+/tmp/ccZ3s1bM.o: In function `main':
 /home/champ/code/nfdump-1.6.10p1-sagan/conftest.c:83: undefined reference to `res_search'
 collect2: ld returned 1 exit status
 configure:7413: $? = 1
@@ -3955,7 +3958,7 @@ configure:7433: checking for dn_skipname in -lresolv
 configure:7458: gcc -o conftest -g -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wmissing-noreturn -fno-strict-aliasing -DSAGAN   conftest.c -lresolv   >&5
 conftest.c:79:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
 conftest.c:81:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
-/tmp/cciJJUis.o: In function `main':
+/tmp/ccQWYDUS.o: In function `main':
 /home/champ/code/nfdump-1.6.10p1-sagan/conftest.c:83: undefined reference to `dn_skipname'
 collect2: ld returned 1 exit status
 configure:7458: $? = 1
