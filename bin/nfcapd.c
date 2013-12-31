@@ -246,6 +246,26 @@ static void IntHandler(int signal) {
 		case SIGCHLD:
 			launcher_alive = 0;
 			break;
+#ifdef SAGAN
+
+		/* If Sagan exits,  this allows nfcapd to wait and re-open the FIFO when it 
+		   comes avaliable again */
+
+                case SIGPIPE:                                          
+
+                        if ( sagan ) {
+
+				fclose(sagan_fd); 
+                                LogInfo("Re-opening Sagan \"%s\" for writing, waiting on reader.\n", sagan_fifo);
+                                        if (( sagan_fd = open(sagan_fifo, O_WRONLY)) < 0 ) {
+                                         fprintf(stderr, "Cannot open Sagan fifo at %s\n", sagan_fifo);
+                                         exit(1);
+                        }
+                LogInfo("Successfully opened \"%s\".\n", sagan_fifo);
+        }
+
+#endif
+
 		default:
 			// ignore everything we don't know
 			break;
@@ -1219,16 +1239,17 @@ char	*pcap_file;
 	sigaction(SIGCHLD, &act, NULL);
 
 #ifdef SAGAN
+        sigaction(SIGPIPE, &act, NULL);		/* Handler for when the Sagan FIFO reader exits */
+
         if ( sagan ) {
-                LogInfo("Opening Sagan \"%s\" for writing, waiting on reader.\n", sagan_fifo);
+                LogInfo("Opening Sagan \"%s\" for writing, waiting on reader.", sagan_fifo);
                 if (( sagan_fd = open(sagan_fifo, O_WRONLY)) < 0 ) {
                         fprintf(stderr, "Cannot open Sagan fifo at %s\n", sagan_fifo);
                         exit(1);
                 }
-                LogInfo("Successfully opened \"%s\".\n", sagan_fifo);
+                LogInfo("Successfully opened \"%s\".", sagan_fifo);
         }
 #endif  
-
 
 	LogInfo("Startup.");
 	run(receive_packet, sock, peer, twin, t_start, report_sequence, subdir_index, compress, do_xstat);

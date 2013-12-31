@@ -1894,8 +1894,8 @@ char            sagan_string[MAX_SAGAN_STRING];
 			sagan_string[MAX_SAGAN_STRING-1] = '\0';
 
 			if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) {
-				printf("Error writing\n");
-			}
+				syslog(LOG_ERR, "Error writing to Sagan FIFO \"%s\"%.", sagan_fifo);
+				}
 		}
 #endif
 
