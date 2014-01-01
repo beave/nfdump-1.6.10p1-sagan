@@ -1446,7 +1446,6 @@ int					i;
 char				*string;
 
 #ifdef SAGAN
-#define         MAX_SAGAN_STRING        2048
 char            sagan_string[MAX_SAGAN_STRING];
 #endif
 
@@ -1892,10 +1891,8 @@ char            sagan_string[MAX_SAGAN_STRING];
 
 			snprintf(sagan_string, sizeof(sagan_string), "%s\n", string);
 			sagan_string[MAX_SAGAN_STRING-1] = '\0';
-
-			if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) {
-				syslog(LOG_ERR, "Error writing to Sagan FIFO \"%s\"%.", sagan_fifo);
-				}
+			
+			Sagan_Send_FIFO(sagan_string);
 		}
 #endif
 

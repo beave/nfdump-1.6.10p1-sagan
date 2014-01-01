@@ -131,3 +131,8 @@ inline void condense_v6(char *s);
 
 #endif //_NF_COMMON_H
 
+#ifdef SAGAN
+void Sagan_Send_Ping(void); 
+void Sagan_Send_FIFO(char *);
+void Sagan_FIFO_Open(int);
+#endif

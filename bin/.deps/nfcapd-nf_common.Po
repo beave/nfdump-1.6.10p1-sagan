@@ -28,8 +28,15 @@ nfcapd-nf_common.o: nf_common.c ../config.h /usr/include/stdio.h \
  /usr/include/alloca.h /usr/include/bits/stdlib.h /usr/include/errno.h \
  /usr/include/bits/errno.h /usr/include/linux/errno.h \
  /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
- /usr/include/asm-generic/errno-base.h sagan.h nffile.h nf_common.h \
- util.h applybits_inline.c
+ /usr/include/asm-generic/errno-base.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ /usr/include/bits/unistd.h /usr/include/syslog.h \
+ /usr/include/sys/syslog.h /usr/include/bits/syslog-path.h \
+ /usr/include/bits/syslog.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h /usr/include/bits/stat.h \
+ /usr/include/bits/fcntl2.h sagan.h nffile.h nf_common.h util.h \
+ applybits_inline.c
 
 ../config.h:
 
@@ -156,6 +163,34 @@ nfcapd-nf_common.o: nf_common.c ../config.h /usr/include/stdio.h \
 /usr/include/asm-generic/errno.h:
 
 /usr/include/asm-generic/errno-base.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/bits/unistd.h:
+
+/usr/include/syslog.h:
+
+/usr/include/sys/syslog.h:
+
+/usr/include/bits/syslog-path.h:
+
+/usr/include/bits/syslog.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/bits/fcntl.h:
+
+/usr/include/bits/stat.h:
+
+/usr/include/bits/fcntl2.h:
 
 sagan.h:
 

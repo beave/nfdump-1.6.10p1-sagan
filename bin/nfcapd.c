@@ -252,18 +252,8 @@ static void IntHandler(int signal) {
 		   comes avaliable again */
 
                 case SIGPIPE:                                          
-
-                        if ( sagan ) {
-
-				fclose(sagan_fd); 
-                                LogInfo("Re-opening Sagan \"%s\" for writing, waiting on reader.\n", sagan_fifo);
-                                        if (( sagan_fd = open(sagan_fifo, O_WRONLY)) < 0 ) {
-                                         fprintf(stderr, "Cannot open Sagan fifo at %s\n", sagan_fifo);
-                                         exit(1);
-                        }
-                LogInfo("Successfully opened \"%s\".\n", sagan_fifo);
-        }
-
+                        if ( sagan ) Sagan_FIFO_Open(1); 
+			break;
 #endif
 
 		default:
@@ -601,6 +591,11 @@ srecord_t	*commbuff;
 				LogInfo("Ident: '%s' Flows: %llu, Packets: %llu, Bytes: %llu, Sequence Errors: %u, Bad Packets: %u", 
 					fs->Ident, (unsigned long long)nffile->stat_record->numflows, (unsigned long long)nffile->stat_record->numpackets, 
 					(unsigned long long)nffile->stat_record->numbytes, nffile->stat_record->sequence_failure, fs->bad_packets);
+
+#ifdef SAGAN
+				if ( sagan ) Sagan_Send_Ping(); 
+#endif
+
 
 				// reset stats
 				fs->bad_packets = 0;
@@ -1240,15 +1235,10 @@ char	*pcap_file;
 
 #ifdef SAGAN
         sigaction(SIGPIPE, &act, NULL);		/* Handler for when the Sagan FIFO reader exits */
-
-        if ( sagan ) {
-                LogInfo("Opening Sagan \"%s\" for writing, waiting on reader.", sagan_fifo);
-                if (( sagan_fd = open(sagan_fifo, O_WRONLY)) < 0 ) {
-                        fprintf(stderr, "Cannot open Sagan fifo at %s\n", sagan_fifo);
-                        exit(1);
-                }
-                LogInfo("Successfully opened \"%s\".", sagan_fifo);
-        }
+        if ( sagan ) { 
+		Sagan_FIFO_Open(0); 
+		Sagan_Send_Ping();
+		}
 #endif  
 
 	LogInfo("Startup.");

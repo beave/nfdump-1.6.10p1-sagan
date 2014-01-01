@@ -45,6 +45,8 @@
 
 #ifdef SAGAN
 
+#define         MAX_SAGAN_STRING        2048
+
 int	sagan;				// Sagan flag
 char	*sagan_fifo;			// Sagan FIFO name
 int	sagan_fd;			// Sagan File Descriptor

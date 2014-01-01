@@ -53,6 +53,9 @@
 #endif
 
 #ifdef SAGAN
+#include <unistd.h>
+#include <syslog.h>
+#include <fcntl.h>
 #include "sagan.h"
 #endif
 
@@ -3180,11 +3183,6 @@ master_record_t *r = (master_record_t *)record;
 
 	_s = data_string;
 	slen = STRINGSIZE;
-//	snprintf(_s, slen-1, "%s,%s,%.3f,%s,%s,%u,%u,%s,%s,%u,%u,%llu,%llu,%llu,%llu",
-//		datestr1, datestr2, duration, as,ds,r->srcport, r->dstport, proto_str, flags_str, 
-//		r->fwd_status, r->tos, (unsigned long long)r->dPkts, (unsigned long long)r->dOctets,
-//		(long long unsigned)r->out_pkts, (long long unsigned)r->out_bytes
-//	);
 	
 	snprintf(_s, slen-1, "%s|local0|info|info|0|%s|nfcapd| source_ip: %s/%u, destination_ip: %s/%u, protocol: %s, duration: %.3f, flags: |%s|, tos: %u, packets: %llu, bytes: %llu, last_time: %s", sagan_ipstr, datestr1, as, r->srcport, ds, r->dstport, proto_str, duration, flags_str, r->tos, (unsigned long long)r->dPkts, (long long unsigned)r->out_bytes, datestr2 );
 
@@ -3206,5 +3204,40 @@ master_record_t *r = (master_record_t *)record;
 	
 
 } // End of flow_record_to_sagan
+
+
+void Sagan_Send_Ping( void ) { 
+
+char            sagan_string[MAX_SAGAN_STRING];
+
+strncpy(sagan_string, "127.0.0.1|local0|info|info|0|0000-00-00|00:00:00|nfcapd| NFCAPD PING\n", MAX_SAGAN_STRING-1);
+
+	if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) 
+		syslog(LOG_ERR, "Error sending PING to Sagan FIFO \"%s\"%.", sagan_fifo);
+}
+
+void Sagan_Send_FIFO( char *sagan_string)  { 
+
+if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) {
+   syslog(LOG_ERR, "Error writing to Sagan FIFO \"%s\"%.", sagan_fifo);
+   }
+}
+
+
+void Sagan_FIFO_Open( int flag ) { 
+
+if ( flag == 0 ) { 
+	LogInfo("Opening Sagan \"%s\" for writing, waiting on reader.", sagan_fifo);
+	} else { 
+	close(sagan_fd); 
+	LogInfo("Re-Opening Sagan \"%s\" for writing, waiting on reader.", sagan_fifo);
+	}
+
+	if (( sagan_fd = open(sagan_fifo, O_WRONLY)) < 0 ) {
+		fprintf(stderr, "Cannot open Sagan fifo at %s\n", sagan_fifo);
+		exit(1);
+		}
+LogInfo("Successfully opened \"%s\".", sagan_fifo);
+}
 
 #endif
