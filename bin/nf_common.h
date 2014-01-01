@@ -131,6 +131,10 @@ inline void condense_v6(char *s);
 
 #endif //_NF_COMMON_H
 
+/****************************************************************************
+ * Sagan specific prototypes 
+ ****************************************************************************/
+
 #ifdef SAGAN
 void Sagan_Send_Ping(void); 
 void Sagan_Send_FIFO(char *);

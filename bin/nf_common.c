@@ -3076,6 +3076,13 @@ char 	icmp_port[MAX_STRING_LENGTH];
 
 #endif
 
+/****************************************************************************
+ * Sagan specific functions! 
+ ****************************************************************************/
+
+ /* Decoder/format used for the Sagan FIFO .  Largely based on the function
+  * flow_record_to_csv() above */
+
 #ifdef SAGAN
 void flow_record_to_sagan(void *record, char ** s, int tag) {
 char 		*_s, as[IP_STRING_LEN], ds[IP_STRING_LEN]; 
@@ -3206,6 +3213,12 @@ master_record_t *r = (master_record_t *)record;
 } // End of flow_record_to_sagan
 
 
+/* We tie this function to when nfcapd displays statistics.  This happens 
+ * every 5 minutes.  This creates a fake "ping" packet we use at Quadrant
+ * to make sure the sensor is "up".  There's a low priority signauture in
+ * Sagan that monitors for this event 
+ */
+
 void Sagan_Send_Ping( void ) { 
 
 char            sagan_string[MAX_SAGAN_STRING];
@@ -3216,6 +3229,8 @@ strncpy(sagan_string, "127.0.0.1|local0|info|info|0|0000-00-00|00:00:00|nfcapd| 
 		syslog(LOG_ERR, "Error sending PING to Sagan FIFO \"%s\"%.", sagan_fifo);
 }
 
+/* Write's data to the FIFO */
+
 void Sagan_Send_FIFO( char *sagan_string)  { 
 
 if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) {
@@ -3223,6 +3238,7 @@ if ((write(sagan_fd, sagan_string, strlen(sagan_string))) < 0) {
    }
 }
 
+/* Open or Re-Open the FIFO on reader failure */
 
 void Sagan_FIFO_Open( int flag ) { 
 
