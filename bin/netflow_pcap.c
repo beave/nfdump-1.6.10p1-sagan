@@ -352,7 +352,7 @@ char            sagan_string[MAX_SAGAN_STRING];
 #ifdef SAGAN
 	if ( sagan ) {
 		master_record_t master_record;
-		ExpandRecord_v2((common_record_t *)common_record, &v5_extension_info, &(exporter->info), &master_record);
+		ExpandRecord_v2((common_record_t *)common_record, &pcap_extension_info, NULL, &master_record);
 		flow_record_to_sagan(&master_record, &string, 0);
 
 		snprintf(sagan_string, sizeof(sagan_string), "%s\n", string);
