@@ -12,7 +12,7 @@ nfcapd -l /var/log/netflow-archive -p 2056 -F /var/run/sagan-netflow.fifo
 This tells nfcapd to record data,  as normal,  to the /var/log/netflow-archive
 directory.  "nfcapd" will listen on UDP port 2056 for NetFlow data. 
 The decoded data will also be written to the  /var/run/sagan-netflow.fifo. 
-The modified nfcapd will with the NetFlow data in a Sagan/FIFO format.
+The modified nfcapd will dump the NetFlow data in a Sagan/FIFO format.
 That is to say,  no additional formating is necessary.
 
 More information can be found at:
