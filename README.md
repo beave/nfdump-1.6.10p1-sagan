@@ -2,7 +2,7 @@ Modified Nfdump for use with Sagan
 ----------------------------------
 
 This is a modified version of nfdump utilities to support the Sagan 
-log analysis engine (https://github.com/beave/sagan). 
+log analysis engine (http://sagan.quadrantsec.com). 
 
 When compiling, build with the "--enable-sagan" flag.  This adds a
 new command line option for nfcapd (-F).  For example:
