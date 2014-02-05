@@ -10,13 +10,14 @@ new command line option for nfcapd (-F).  For example:
 nfcapd -l /var/log/netflow-archive -p 2056 -F /var/run/sagan-netflow.fifo
 
 This tells nfcapd to record data,  as normal,  to the /var/log/netflow-archive
-directory.  nfcapd should listen on port 2056 for netflow data. 
-That data should be written the /var/run/saggan-netflow.fifo.  The FIFO
-written to in the Sagan format.  That is,  no additional formating is
-necessary.
+directory.  "nfcapd" will listen on UDP port 2056 for NetFlow data. 
+The decoded data will also be written to the  /var/run/sagan-netflow.fifo. 
+The modified nfcapd will with the NetFlow data in a Sagan/FIFO format.
+That is to say,  no additional formating is necessary.
 
-A Sagan + Netflow HOWTO will be released soon.
+More information can be found at:
 
+https://wiki.quadrantsec.com/twiki/bin/view/Main/SaganNetflow
 
 Original README continues below
 -------------------------------

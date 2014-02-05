@@ -58,9 +58,9 @@ TESTS = nftest$(EXEEXT) test.sh
 #am__append_2 = nfprofile
 #am__append_3 = nftrack
 #am__append_4 = ft2nfdump
-#am__append_5 = pcap_reader.c pcap_reader.h
-#am__append_6 = nfpcapd
-#am__append_7 = pcap_reader.c pcap_reader.h
+am__append_5 = pcap_reader.c pcap_reader.h
+am__append_6 = nfpcapd
+am__append_7 = pcap_reader.c pcap_reader.h
 subdir = bin
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/depcomp $(top_srcdir)/ylwrap grammar.c grammar.h \
@@ -77,7 +77,7 @@ CONFIG_CLEAN_VPATH_FILES =
 #am__EXEEXT_2 = nfprofile$(EXEEXT)
 #am__EXEEXT_3 = nftrack$(EXEEXT)
 #am__EXEEXT_4 = ft2nfdump$(EXEEXT)
-#am__EXEEXT_5 = nfpcapd$(EXEEXT)
+am__EXEEXT_5 = nfpcapd$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__ft2nfdump_SOURCES_DIST = ft2nfdump.c nf_common.c nf_common.h \
@@ -127,7 +127,7 @@ am__objects_18 = nfcapd-netflow_v9.$(OBJEXT)
 am__objects_19 = nfcapd-ipfix.$(OBJEXT)
 am__objects_20 = nfcapd-bookkeeper.$(OBJEXT)
 am__objects_21 = nfcapd-expire.$(OBJEXT)
-#am__objects_22 = nfcapd-pcap_reader.$(OBJEXT)
+am__objects_22 = nfcapd-pcap_reader.$(OBJEXT)
 am_nfcapd_OBJECTS = nfcapd-nfcapd.$(OBJEXT) $(am__objects_8) \
 	$(am__objects_9) $(am__objects_10) $(am__objects_11) \
 	$(am__objects_12) $(am__objects_13) $(am__objects_14) \
@@ -248,7 +248,7 @@ am__objects_61 = sfcapd-nfnet.$(OBJEXT)
 am__objects_62 = sfcapd-collector.$(OBJEXT)
 am__objects_63 = sfcapd-bookkeeper.$(OBJEXT)
 am__objects_64 = sfcapd-expire.$(OBJEXT)
-#am__objects_65 = sfcapd-pcap_reader.$(OBJEXT)
+am__objects_65 = sfcapd-pcap_reader.$(OBJEXT)
 am_sfcapd_OBJECTS = sfcapd-sfcapd.$(OBJEXT) sfcapd-sflow.$(OBJEXT) \
 	$(am__objects_55) $(am__objects_56) $(am__objects_57) \
 	$(am__objects_58) $(am__objects_59) $(am__objects_60) \
@@ -445,16 +445,16 @@ nfpcapd_SOURCES = nfpcapd.c \
 	$(common) $(util) $(filelzo) $(nflist) $(nfstatfile) $(launch) \
 	$(nfnet) $(collector) $(bookkeeper) $(expire) $(content)
 
-#nfcapd_CFLAGS = -DPCAP
-#nfcapd_LDADD = -lpcap 
-#nfpcapd_CFLAGS = -D_BSD_SOURCE
-#nfpcapd_LDADD = -lpcap 
-#nfpcapd_LDFLAGS = -pthread
+nfcapd_CFLAGS = -DPCAP
+nfcapd_LDADD = -lpcap 
+nfpcapd_CFLAGS = -D_BSD_SOURCE
+nfpcapd_LDADD = -lpcap 
+nfpcapd_LDFLAGS = -pthread
 sfcapd_SOURCES = sfcapd.c sflow.c sflow.h sflow_proto.h $(common) \
 	$(util) $(filelzo) $(nflist) $(nfstatfile) $(launch) $(nfnet) \
 	$(collector) $(bookkeeper) $(expire) $(am__append_7)
-#sfcapd_CFLAGS = -DPCAP
-#sfcapd_LDADD = -lpcap
+sfcapd_CFLAGS = -DPCAP
+sfcapd_LDADD = -lpcap
 nfreader_SOURCES = nfreader.c \
 	$(util) $(filelzo) $(nflist)  $(exporter)
 
